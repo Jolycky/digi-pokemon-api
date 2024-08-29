@@ -1,11 +1,11 @@
-const express = require('express');
-const app = express();
+const http = require('http');
 const pokemonRoutes = require('./routes/pokemonRoutes');
 
-app.use(express.json());
-app.use('/', pokemonRoutes);
+const server = http.createServer((req, res) => {
+    pokemonRoutes(req, res);
+});
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}/`);
 });
